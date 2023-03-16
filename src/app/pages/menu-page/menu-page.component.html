@@ -1,0 +1,6 @@
+<div class="max-w-7xl container mx-auto pt-20 flex">
+    <app-menu [productCategories]="bakeryService.productCategories"/>
+    <div class="max-w-2xl container mx-auto ">
+        <app-category *ngFor="let productCategory of bakeryService.productCategories" [productCategory]="productCategory"/>
+    </div>
+</div>

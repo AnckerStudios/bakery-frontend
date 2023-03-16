@@ -1,0 +1,8 @@
+<div class=" fixed flex flex-col">
+    <div>
+        Меню
+    </div>
+    <div *ngFor="let productCategory of productCategories" class="border-l-2 pl-4 hover:border-l-4 hover:pl-8 hover:font-semibold border-r-yellow-500">
+        {{productCategory?.category?.name}}
+    </div>
+</div>
