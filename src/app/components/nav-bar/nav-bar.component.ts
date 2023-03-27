@@ -12,7 +12,15 @@ import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 })
 export class NavBarComponent {
   selectBakery?: IBakery | string ;
-  bakerys: IBakery[] = [];
+  bakerys: IBakery[] = [{
+    id: "string",
+    name: "string",
+    address: "string"
+  },{
+    id: "string2",
+    name: "string2",
+    address: "string2"
+  }];
   constructor(public bakeryService: BakeryService, public modalDialog : ModalDialogService) { }
   ngOnInit(): void {
     this.getBakerys();
@@ -21,12 +29,5 @@ export class NavBarComponent {
   getBakerys(): void {
     this.bakeryService.getBakerys().subscribe(bakerys => this.bakerys = bakerys)
   }
-  onChange(newValue: IBakery | string) {
-    if(typeof newValue == "string"){
-      this.modalDialog.isOpen = true;
-      this.selectBakery = this.bakerys[0];
-    }else{
-      this.bakeryService.getCategories(newValue);  
-    }
-}
+  
 }

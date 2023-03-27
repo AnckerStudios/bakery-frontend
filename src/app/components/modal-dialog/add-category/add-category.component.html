@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col items-center gap-4">
+    <input type="text" class="rounded-2xl border w-full px-4 py-2 bg-gray-200 " 
+        placeholder="Название"
+        formControlName="name">
+        <p class="text-red-600 font-medium" *ngIf="name.errors?.['required']">Введите название новой категории</p>
+    <div class="rounded-2xl w-full bg-gray-200 flex cursor-pointer select-none" (click)="isDrink=!isDrink">
+        <div class="w-full {{!isDrink && 'bg-blue-400 shadow-lg font-bold'}} rounded-2xl px-4 py-2 text-center">Еда</div>
+        <div class="w-full {{isDrink && 'bg-blue-400 shadow-lg font-bold'}} rounded-2xl px-4 py-2 text-center">Напитки</div>
+    </div>
+    <button type="submit"
+        class="rounded-2xl border h-full  px-6 py-2 bg-orange-300"><strong>Создать категорию</strong></button>
+</form>

@@ -1,7 +1,7 @@
 <div class="text-2xl my-6 font-semibold">{{productCategory?.category?.name}}</div>
 <div  class="grid grid-cols-3 gap-4">
     <app-product *ngFor="let product of productCategory?.products" [product]="product" />
-    <div (click)="model.isOpen = true" class="group p-4 flex items-center flex-col h-60 justify-center relative hover:scale-110 rounded-2xl border-2 border-dashed hover:border-red-800 cursor-pointer">
+    <div (click)="addProduct()" class="group p-4 flex items-center flex-col h-60 justify-center relative hover:scale-110 rounded-2xl border-2 border-dashed hover:border-red-800 cursor-pointer">
         
         <h1 class="font-bold text-9xl underline-offset-0 text-gray-300 text-clip ">+</h1> 
         <h1 class="font-bold text-xl text-gray-300 text-clip ">Добавить</h1> 

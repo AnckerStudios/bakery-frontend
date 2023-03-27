@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Modal } from 'src/app/model/modal';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
 @Component({
@@ -8,5 +9,11 @@ import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 })
 export class ModalDialogComponent {
   constructor(public modalDialog: ModalDialogService){}
- 
+  Modal = Modal;
+
+  close():void{
+    this.modalDialog.setModalType(Modal.hide);
+  }
+
+  
 }

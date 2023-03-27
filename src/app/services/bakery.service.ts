@@ -10,20 +10,21 @@ import { IProductCategories } from '../model/productCategories';
 })
 export class BakeryService {
   private bakerysUrl = 'http://localhost:8080/api/bakery';
+  //private createBakeryUrl = 'http://localhost:8080/api/bakery';
   private productCategoriesUrl = 'http://localhost:8080/api/productBakery/findByBakery/';
 
   public productCategories: IProductCategories[] = [];
 
-  constructor( private http: HttpClient) { 
-    
-  }
+  constructor( private http: HttpClient) { }
   
-  // setSelectBakery(selectBakery: IBakery):void{
-  //   this.selectBakery = selectBakery;
-  // }
-  // getSelectBakery():Observable<IBakery>{
-  //   return of(this.selectBakery);
-  // }
+  createBakery(newBakery : IBakery):Observable<IBakery>{
+    return this.http.post<IBakery>(this.bakerysUrl, newBakery);
+  }
+  deleteBakery():boolean{
+    this.http.delete<IBakery>(this.bakerysUrl);
+    return true;
+  }
+
   getBakerys(): Observable<IBakery[]> {
     return this.http.get<IBakery[]>(this.bakerysUrl);
   }

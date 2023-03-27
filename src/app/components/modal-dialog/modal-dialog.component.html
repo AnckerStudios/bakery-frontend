@@ -1,8 +1,13 @@
-<div *ngIf="modalDialog.isOpen" class="w-screen h-screen bg-opacity-30 bg-black fixed z-40 top-0" (click)="modalDialog.isOpen = false">
-    <div class="max-w-4xl mx-auto h-full z-50">
-    <div class="h-1/2 bg-white rounded-2xl mt-10 shadow-lg px-2">
-        <div class="text-center text-3xl font-semibold border-b p-4">Header</div>
-    </div>
+<div  class=" bg-black/50 fixed z-40 top-0 bottom-0 right-0 left-0"
+    (click)="close()">
 </div>
 
+<div [ngSwitch]="modalDialog.getModalType()"
+    class="bg-white top-0 w-[600px] rounded-2xl shadow-lg absolute p-4 px-16 z-40 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center">
+    <div class="text-center text-3xl font-semibold border-b pb-4">Header</div>
+    <app-add-product class="w-full" *ngSwitchCase="Modal.addProduct"/>
+    <app-add-bakery *ngSwitchCase="Modal.addBakery"/>
+    <app-del-bakery *ngSwitchCase="Modal.delBakery"/>
+    <app-add-category *ngSwitchCase="Modal.addCategory"/>
+    <div *ngSwitchDefault>Ой, такого модального окна нет</div>
 </div>

@@ -1,0 +1,27 @@
+<div class=" flex flex-col items-center gap-4">
+    <div class=" flex gap-8">
+        <div (click)="type=false">Создать</div>
+        <div (click)="type=true">Добавить</div>
+    </div>
+    <div class="flex justify-between w-full">
+        <div class="rounded-full border-dashed {{step!==1 ? 'border-2' :'bg-orange-200' }} w-12 h-12 flex items-center justify-center">1</div>
+        <div class="rounded-full border-dashed {{step!==2 ? 'border-2' :'bg-orange-200' }} w-12 h-12 flex items-center justify-center">2</div>
+        <div class="rounded-full border-dashed {{step!==3 ? 'border-2' :'bg-orange-200' }} w-12 h-12 flex items-center justify-center">3</div>
+    </div>
+    <div [ngSwitch]="type" class="w-full flex flex-col items-center">
+        <div *ngSwitchCase="false" class="w-full">
+                <app-first-step *ngIf="step==1"/> 
+                <app-second-step *ngIf="step==2"/>
+                <app-select-bakery *ngIf="step==3" class="w-full flex flex-col gap-4"/>
+            
+        </div>
+        <div *ngSwitchCase="true">
+
+        </div>
+    </div>
+    <div class="flex gap-4 w-full">
+        <button *ngIf="step!==1" class="p-2 rounded-lg bg-orange-200" (click)="backStep()">‹</button>
+        <button class="p-2 rounded-lg bg-orange-200" (click)="forwardStep()">›</button>
+    </div>
+    
+</div>

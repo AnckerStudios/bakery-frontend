@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Modal } from 'src/app/model/modal';
 import { IProductCategories } from 'src/app/model/productCategories';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
@@ -9,5 +10,9 @@ import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 })
 export class CategoryComponent {
   @Input() productCategory?: IProductCategories;
-  constructor(public model : ModalDialogService){}
+  constructor(public modalDialog : ModalDialogService){}
+
+  addProduct(){
+    this.modalDialog.setModalType(Modal.addProduct);
+  }
 }

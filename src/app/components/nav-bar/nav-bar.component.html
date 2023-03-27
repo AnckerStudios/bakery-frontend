@@ -1,10 +1,17 @@
-<div class="w-full h-20 shadow-lg fixed z-30 bg-white">
-        <div class="max-w-2xl container mx-auto py-4  h-full">
-            <select class="rounded-2xl border h-full w-full px-4" [value]="selectBakery"  placeholder="Выбирите пекарню" >
-            
-                <option >-- Добавить пекарню --</option>
-                <option *ngFor="let bakery of bakerys" [ngValue]="bakery">{{bakery?.name}}</option>
-            </select>
+<div class="w-full h-20 shadow-lg fixed z-20 bg-white flex items-center">
+        <div class="max-w-2xl container mx-auto h-12">
+            <app-select-two [bakerys]="bakerys"/>
+
         </div>
-    
+        <div class="absolute right-0">
+            <div >
+                Товары
+            </div>
+            <div routerLink="/categories">
+                Категории
+            </div>
+            <div routerLink="/ingredients">
+                Ингредиенты
+            </div>
+        </div>
 </div>

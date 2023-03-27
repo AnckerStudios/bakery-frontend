@@ -1,0 +1,31 @@
+<div class="flex gap-4 w-full ">
+    <div class=" " (click)="filePicker.click()">
+        <div class="border-dashed border-4 w-52 h-52 rounded-xl select-none">
+            <div *ngIf="imagePreview !== '' && imagePreview" class="w-full h-full flex items-center justify-center">
+                <img [src]="imagePreview" alt="form.value.title" >
+            </div>
+            <div *ngIf="!imagePreview" class="w-full h-full flex flex-col items-center justify-center">
+                <img src="/assets/images/addImage.svg" alt="+" class="w-2/3 divide-orange-300 fill-slate-500">
+                <p>Добавить изображение</p>
+            </div>
+            
+        </div>
+
+        <input type="file" (change)="onImagePicked($event)" #filePicker hidden>
+    </div>
+    <form [formGroup]="form" class="flex flex-col justify-between flex-grow">
+        <input [(ngModel)]="productName" type="text"
+            class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" placeholder="Название"
+            formControlName="name">
+        <select class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" [ariaPlaceholder]="'Название'">
+            <option></option>
+        </select>
+        <div class="flex gap-4">
+            <p>Цена:</p>
+            <input [(ngModel)]="productName" type="text"
+            class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" placeholder="Название"
+            formControlName="title">
+        </div>
+    </form>
+
+</div>
