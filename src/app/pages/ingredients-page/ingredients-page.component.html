@@ -1,0 +1,9 @@
+<div class="max-w-2xl container mx-auto pt-20 flex flex-col">
+    <div class="mt-5 flex flex-col gap-4">
+        <app-ingredient-list-item *ngFor="let ingredient of ingredients" [ingredient]="ingredient" (delIngredientItem)="delIngredient($event)"/>
+        <div (click)="addIngredient()" class="rounded-xl border-dashed border-2 p-4 px-6">
+            add
+        </div>
+    </div>
+    
+</div>

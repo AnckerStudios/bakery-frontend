@@ -1,8 +1,9 @@
 <div class="max-w-2xl container mx-auto pt-20 flex flex-col">
     <div class="mt-5 flex flex-col gap-4">
-        <app-category-list-item *ngFor="let category of categories" [category]="category"/>
+        <app-category-list-item *ngFor="let category of categories" [category]="category" (delCategoryItem)="delCategory($event)"/>
+        <div (click)="addCategory()" class="rounded-xl border-dashed border-2 p-4 px-6">
+            add
+        </div>
     </div>
-    <div (click)="addCategory()" class="p-2 rounded-xl border-dashed ">
-        add
-    </div>
+    
 </div>

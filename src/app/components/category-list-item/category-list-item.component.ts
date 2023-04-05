@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { ICategory } from 'src/app/model/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-list-item',
@@ -8,21 +10,32 @@ import { ICategory } from 'src/app/model/category';
 })
 export class CategoryListItemComponent {
   @Input() category?: ICategory;
-
+  @Output() delCategoryItem = new EventEmitter<string>();
+  constructor(private categoryService: CategoryService){}
   ngOnInit(){
-
+    console.log(this.category)
+    
   }
   isEdit: boolean = false;
   onEdit(){
     this.isEdit = true;
   }
   delCategory(){
-
+    if(this.category && this.category.id){
+      this.categoryService.delete(this.category.id).subscribe(()=> this.delCategoryItem.emit(this.category?.id));
+    }
   }
   updateCategory(){
-    this.isEdit = false;
+    if(this.category){
+      console.log(this.category)
+      this.categoryService.update(this.category).subscribe();
+      this.isEdit = false;
+    }
   }
   changeIsDrink(){
-    this.category?.isDrink = false;
+    if(this.category){
+      this.category.isDrink = !this.category.isDrink;
+    }
   }
+
 }

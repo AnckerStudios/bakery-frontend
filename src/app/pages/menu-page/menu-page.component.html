@@ -1,7 +1,7 @@
 <div class="max-w-7xl container mx-auto pt-20 flex ">
     <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/>
-    <div class="max-w-2xl flex-grow-0 container  h-[1000pt]">
+    <div class="max-w-2xl flex-grow-0 container ">
         <app-category *ngFor="let productCategory of bakeryService.productCategories" [productCategory]="productCategory"/>
     </div>
-    <app-right-side-panel class="flex-grow"/>
+    <app-right-side-panel class="flex-grow "/>
 </div>

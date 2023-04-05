@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Modal } from 'src/app/model/modal';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
@@ -13,6 +15,11 @@ export class ModalDialogComponent {
 
   close():void{
     this.modalDialog.setModalType(Modal.hide);
+  }
+
+  confirm(respons: FormGroup){
+    this.modalDialog.setResult(respons);
+    this.close();
   }
 
   

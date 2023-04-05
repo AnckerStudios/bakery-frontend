@@ -15,12 +15,12 @@ export class BakeryService {
 
   public productCategories: IProductCategories[] = [];
 
-  constructor( private http: HttpClient) { }
-  
-  createBakery(newBakery : IBakery):Observable<IBakery>{
+  constructor(private http: HttpClient) { }
+
+  createBakery(newBakery: IBakery): Observable<IBakery> {
     return this.http.post<IBakery>(this.bakerysUrl, newBakery);
   }
-  deleteBakery():boolean{
+  deleteBakery(): boolean {
     this.http.delete<IBakery>(this.bakerysUrl);
     return true;
   }
@@ -29,7 +29,10 @@ export class BakeryService {
     return this.http.get<IBakery[]>(this.bakerysUrl);
   }
   getCategories(bakery: IBakery): void {
-    this.http.get<IProductCategories[]>(this.productCategoriesUrl+bakery?.id).subscribe(selectBakery => {this.productCategories = selectBakery; console.log(this.productCategories)});
+    this.http.get<IProductCategories[]>(this.productCategoriesUrl + bakery?.id).subscribe(item => {
+      this.productCategories = item;
+      console.log(this.productCategories)
+    });
   }
 
 }

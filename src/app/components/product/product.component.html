@@ -1,13 +1,22 @@
-<div routerLink="/product/{{product?.id}}"
-        class="group p-4 flex items-center flex-col h-60 justify-center relative hover:scale-110">
+<div *ngIf="productBakery" class="group h-64 hover:scale-110">
+        <div class="flex items-center flex-col w-full h-full p-1 justify-end relative"
+                routerLink="/product/{{productBakery.product.id}}">
+                <div class=" absolute top-0 w-40 h-40 object-cover rounded-full  ">
+                        <img *ngIf="image" [src]="image" alt="картинка"
+                                class="z-10 object-cover w-full h-full rounded-full">
+                        <img *ngIf="!image" src="/assets/images/no-image.png" alt="картинка" class="z-10">
+                </div>
 
-        <img src="/assets/images/pngwing.com.png" alt="картинка" class="z-10">
-        <h2 class="text-lg z-10"><strong>{{product?.name}}</strong></h2>
-        <p class="z-10">Мини описание</p>
-        <h2 class="text-xl z-10 mb-4"><strong>40₽</strong></h2>
-        <div class="w-full h-2/3 rounded-2xl shadow-xl  absolute bottom-0 group-hover:border-red-800 group-hover:border-2 border ">
-                <div class="absolute top-1 right-2 text-gray-400 font-semibold">
-                        ✕
+
+                <div
+                        class="flex items-center flex-col w-full h-2/3 rounded-2xl shadow-xl justify-end bottom-0 group-hover:border-red-800 group-hover:border-2 border ">
+                        <h2 class="z-10 text-2xl pb-1"><strong>{{productBakery.product.name}}</strong></h2>
+                        <p class="z-10 text-xs">{{productBakery.product.volume}} {{productBakery.product.category.isDrink ? 'мл' : 'г'}}</p>
+                        <h2 class="text-xl z-10 mb-4"><strong>{{productBakery.price}} ₽</strong></h2>
                 </div>
         </div>
+        <div class="absolute bottom-2/3 right-2 text-gray-400 font-semibold">
+                ✕
+        </div>
+
 </div>

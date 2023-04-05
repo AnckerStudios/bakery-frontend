@@ -9,13 +9,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
-  productUrl = 'http://localhost:8080/api/product/ss';
+  productUrl = 'http://localhost:8080/api/product';
+  
  
   constructor( private http: HttpClient) { }
 
   getProduct(id: string): Observable<IProduct> {
-    const product = products.find(p => p.id === id)!;
-    return of(product);
+    
+    return this.http.get<IProduct>(`${this.productUrl}/findById/${id}`);
+  }
+
+  getImage(productId:string):Observable<ArrayBuffer>{
+    return this.http.get(`${this.productUrl}/image/${productId}`, {responseType: 'arraybuffer'});
   }
 
   createProduct(file: File) : Observable<number>{
@@ -23,7 +28,7 @@ export class ProductService {
     formData.append('product', "sss");
     formData.append('image',file,file.name);
     console.log("прием прием я 1 "+file.name);
-    return this.http.post<number>(this.productUrl,formData);
+    return this.http.post<number>(this.productUrl+'/ss',formData);
     
   }
 }

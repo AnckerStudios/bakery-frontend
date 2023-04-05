@@ -1,31 +1,21 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CategoryService } from 'src/app/services/category.service';
+import { IngredientService } from 'src/app/services/ingredient.service';
 
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.css']
+  selector: 'app-add-ingredient',
+  templateUrl: './add-ingredient.component.html',
+  styleUrls: ['./add-ingredient.component.css']
 })
-export class AddCategoryComponent {
+export class AddIngredientComponent {
   @Output() response = new EventEmitter<FormGroup>();
   form = new FormGroup({
     name: new FormControl<string>('', [
-      Validators.required,
-      Validators.min(8)
-    ]),
-    isDrink: new FormControl<boolean>(false, [
       Validators.required
     ])
   })
   get name(){
     return this.form.controls.name as FormControl;
-  }
-  get isDrink(){
-    return this.form.value.isDrink;
-  }
-  set isDrink(isDrink){
-    this.form.value.isDrink = isDrink;
   }
   submit(){
     if(!this.name.errors?.['required']){

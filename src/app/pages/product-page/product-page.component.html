@@ -1,11 +1,15 @@
 
-
-<div *ngIf="product" class="w-full container mx-auto pt-5 bg-slate-300">
+<div class="max-w-4xl container mx-auto pt-20 flex ">
+<div *ngIf="product" class="w-full container mx-auto relative flex">
     <div class="flex justify-between">
-        <h1 class="text-center">{{product.name}}</h1>
+        <h1 class="text-center font-bold text-5xl">{{product.name}}</h1>
 
-    <img src="/assets/images/pngwing.com.png" alt="картинка" class="">
+    </div>
+    <div class=" absolute right-0 translate-x-1/2 w-96 h-96 object-cover rounded-full  ">
+        <!-- <img  [src]="image" alt="картинка"
+                class="z-10 object-cover w-full h-full rounded-full"> -->
+        <img  src="http://localhost:8080/api/product/image/cabb627d-0e5a-4840-8c1d-b34705ee0296"  alt="картинка" class="z-10 object-cover w-full h-full rounded-full">
     </div>
     
-    
+</div>
 </div>

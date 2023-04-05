@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IBakery } from 'src/app/model/bakery';
 import { Modal } from 'src/app/model/modal';
+import { BakeryService } from 'src/app/services/bakery.service';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class SelectTwoComponent {
   @Input() bakerys : IBakery[] = [];
 
 
-  constructor(private modalDialog: ModalDialogService){}
+  constructor(private modalDialog: ModalDialogService, private bakeryService: BakeryService){}
 
   addBakery() : void {
     this.modalDialog.setModalType(Modal.addBakery);
@@ -24,6 +25,10 @@ export class SelectTwoComponent {
   }
   changeBakery(newValue: IBakery) {
     this.selectBakery = newValue;
-    //this.bakeryService.getCategories(newValue);  
+    this.bakeryService.getCategories(newValue);  
+    this.isOpen = false;
+  }
+  updateBakery(bakery: IBakery){
+
   }
 }

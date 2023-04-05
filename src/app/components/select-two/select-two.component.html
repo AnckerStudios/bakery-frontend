@@ -1,6 +1,6 @@
-<div class="w-full h-full relative items-center " (click)="isOpen = !isOpen">
+<div class="w-full h-full relative items-center " >
     <div class="absolute top-0 w-full min-h-full rounded-2xl bg-white {{isOpen ? 'shadow-lg' : 'rounded-2xl'}} select-none" >
-        <div class="h-12 p-3 bg-slate-300 {{isOpen ? 'rounded-t-2xl' : 'rounded-2xl'}} ">
+        <div class="h-12 p-3 bg-slate-300 {{isOpen ? 'rounded-t-2xl' : 'rounded-2xl'}} " (click)="isOpen = !isOpen">
             <strong>
                 <span *ngIf="selectBakery">{{selectBakery.name}}</span>
                 <span *ngIf="!selectBakery">Выбирете пекарню</span>
@@ -8,14 +8,15 @@
         </div>
         <div *ngIf="isOpen" class="">
             <div class="h-12 p-3 hover:bg-zinc-200" (click)="addBakery()"><strong>Добавить новую пекарню +</strong></div>
-            <div *ngFor="let bakery of bakerys" class="h-12 relative hover:bg-zinc-200">
-                <div class="h-full w-full p-3  " (click)="changeBakery(bakery)">
+            <app-select-item *ngFor="let bakery of bakerys" [bakery]="bakery" (change)="changeBakery($event)">
+                <!-- <div class="h-full w-full p-3  " (click)="changeBakery(bakery)">
                     {{bakery.name}}
                 </div>
+                <img src="/assets/images/edit.svg" alt="+" class=" absolute right-10 top-1/2 -translate-y-1/2 w-4" (click)="updateBakery(bakery)">
                 <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold hover:text-red-500" (click)="delBakery(bakery)">
                     ✕
-                </div>
-            </div>
+                </div> -->
+            </app-select-item>
         </div>
     </div>
     

@@ -1,0 +1,12 @@
+<div *ngIf="bakery" class="h-12 relative hover:bg-zinc-200">
+    <input *ngIf="isEdit" class="h-full w-full p-3 bg-slate-200 " [(ngModel)]="bakery.name"/>
+    <div *ngIf="!isEdit" class="h-full w-full p-3" (click)="changeBakery()">
+        {{bakery.name}}
+    </div>
+    <img *ngIf="!isEdit" src="/assets/images/edit.svg" alt="+" class=" absolute right-10 top-1/2 -translate-y-1/2 w-4"
+        (click)="updateBakery()">
+    <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold hover:text-red-500"
+        (click)="delBakery()">
+        ✕
+    </div>
+</div>

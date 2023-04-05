@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { products } from 'src/app/data/products';
 import { IBakery } from 'src/app/model/bakery';
@@ -12,7 +13,6 @@ import { BakeryService } from 'src/app/services/bakery.service';
 })
 export class MenuPageComponent {
   constructor(public bakeryService: BakeryService) { }
-
-
+  
 
 }

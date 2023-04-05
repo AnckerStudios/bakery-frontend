@@ -15,16 +15,18 @@ export class ProductPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private location: Location
+    private productService: ProductService
   ) {}
   ngOnInit(): void {
     this.getProduct();
   }
 
   getProduct(): void {
-    //const id = Number(this.route.snapshot.paramMap.get('id'));
-    // this.productService.getProduct(id)
-    //   .subscribe(product => this.product = product);
+    const id = this.route.snapshot.paramMap.get('id');
+     this.productService.getProduct(id as string)
+       .subscribe(product => {
+        this.product = product;
+        console.log(product);
+      });
   }
 }

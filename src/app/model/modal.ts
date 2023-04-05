@@ -1,8 +1,9 @@
 export enum Modal{
-    hide,
+    hide ,
     addBakery,
     addProduct,
     delBakery,
     delProduct,
-    addCategory
+    addCategory,
+    addIngredient
 }

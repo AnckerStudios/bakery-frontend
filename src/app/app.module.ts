@@ -18,14 +18,15 @@ import { AddProductComponent } from './components/modal-dialog/add-product/add-p
 import { DelBakeryComponent } from './components/modal-dialog/del-bakery/del-bakery.component';
 import { RightSidePanelComponent } from './components/right-side-panel/right-side-panel.component';
 import { SelectTwoComponent } from './components/select-two/select-two.component';
-import { AddIngredientsComponent } from './components/modal-dialog/add-product/add-ingredients/add-ingredients.component';
-import { SelectBakeryComponent } from './components/modal-dialog/add-product/select-bakery/select-bakery.component';
-import { FirstStepComponent } from './components/modal-dialog/add-product/first-step/first-step.component';
-import { SelectCategoryComponent } from './components/modal-dialog/add-product/select-category/select-category.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
-import { SecondStepComponent } from './components/modal-dialog/add-product/second-step/second-step.component';
 import { AddCategoryComponent } from './components/modal-dialog/add-category/add-category.component';
 import { CategoryListItemComponent } from './components/category-list-item/category-list-item.component';
+import { IngredientsPageComponent } from './pages/ingredients-page/ingredients-page.component';
+import { IngredientListItemComponent } from './components/ingredient-list-item/ingredient-list-item.component';
+import { AddIngredientComponent } from './components/modal-dialog/add-ingredient/add-ingredient.component';
+import { CreateProductComponent } from './components/modal-dialog/add-product/create-product/create-product.component';
+import { SelectProductComponent } from './components/modal-dialog/add-product/select-product/select-product.component';
+import { SelectItemComponent } from './components/select-two/select-item/select-item.component';
 
 @NgModule({
   declarations: [
@@ -43,14 +44,15 @@ import { CategoryListItemComponent } from './components/category-list-item/categ
     DelBakeryComponent,
     RightSidePanelComponent,
     SelectTwoComponent,
-    AddIngredientsComponent,
-    SelectBakeryComponent,
-    FirstStepComponent,
-    SelectCategoryComponent,
     CategoryPageComponent,
-    SecondStepComponent,
     AddCategoryComponent,
-    CategoryListItemComponent
+    CategoryListItemComponent,
+    IngredientsPageComponent,
+    IngredientListItemComponent,
+    AddIngredientComponent,
+    CreateProductComponent,
+    SelectProductComponent,
+    SelectItemComponent
   ],
   imports: [
     BrowserModule,

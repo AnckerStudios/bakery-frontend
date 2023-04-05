@@ -17,14 +17,25 @@ export class CategoryPageComponent {
   ngOnInit(): void {
     this.getCategories();
   }
-
   
   getCategories(){
-    this.categoryService.getCategories().subscribe(item => this.categories = item);
+    this.categoryService.getCategories().subscribe(item => {this.categories = item;
+    console.log(this.categories)});
   }
-
+  delCategory(delItemId: string){
+    this.categories = this.categories?.filter((item) => item.id != delItemId);
+  }
   addCategory(){
-    this.modalService.setModalType(Modal.addCategory);
+    this.modalService.setModalType(Modal.addCategory).subscribe(form => {
+      console.log("Я пытаюсь добавьть ", form)
+      this.categoryService.create({
+          isDrink: form.value.isDrink,
+          name: form.value.name
+        }).subscribe(item => {
+          console.log(item);
+          this.categories?.push(item);
+        });
+    });
   }
 
 }
