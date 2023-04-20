@@ -23,6 +23,8 @@ export class AddBakeryComponent {
 
   submit() {
     console.log(this.form.value);
+this.form.value
+
     this.bakeryService.createBakery({
       id: undefined,
       address: this.form.value.address as string,

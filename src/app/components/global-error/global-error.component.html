@@ -1,0 +1,6 @@
+<div class="flex absolute bottom-0 right-0 p-4">
+    <div class="rounded-lg bg-red-500/50 p-4 border border-red-600/50" (click)="clear()">
+        {{errorService.error$ | async}} 
+    </div>
+
+</div>

@@ -1,7 +1,61 @@
-<div class="max-w-7xl container mx-auto pt-20 flex ">
-    <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/>
-    <div class="max-w-2xl flex-grow-0 container ">
-        <app-category *ngFor="let productCategory of bakeryService.productCategories" [productCategory]="productCategory"/>
+<div class="max-w-2xl container mx-auto pt-20 flex ">
+    <!-- <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/> -->
+    <!-- <div class="max-w-2xl flex-grow-0 container "> -->
+    <div *ngIf="allProducts" class="w-full flex flex-col gap-10">
+        <app-select-two />
+        <div *ngIf="!bakeryProducts" class="grid grid-cols-3 gap-4">
+            <div *ngFor="let product of allProducts" class="group h-64 hover:scale-110 relative">
+
+
+                <div class="flex items-center flex-col w-full h-full p-1 justify-end relative"
+                    routerLink="/product/{{product.id}}">
+                    <div class=" absolute top-0 w-40 h-40 object-cover rounded-full  ">
+                        <img src="http://localhost:8080/api/product/image/{{product.id}}" alt="картинка"
+                            class="z-10 object-cover w-full h-full rounded-full">
+
+                    </div>
+
+
+                    <div
+                        class="flex items-center flex-col w-full h-2/3 rounded-2xl shadow-xl justify-end bottom-0 group-hover:border-red-800 group-hover:border-2 border ">
+                        <h2 class="z-10 text-2xl pb-1"><strong>{{product.name}}</strong></h2>
+                        <p class="z-10 text-xs">{{product.volume}} {{product.category?.isDrink ? 'мл' : 'г'}}</p>
+                    </div>
+                </div>
+                <div class="absolute bottom-2/3 right-2 text-gray-400 font-semibold">
+                    ✕
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div *ngIf="bakeryProducts" class="w-full">
+            <div class="bg-gray-200 mx-auto">
+                <button class="p-4 px-6 {{!isAddProduct && 'bg-orange-400'}}"
+                    (click)="isAddProduct = false">Смотреть</button>
+                <button class="p-4 px-6 {{isAddProduct && 'bg-orange-400'}}" (click)="isAddProduct = true">Добавить</button>
+            </div>
+            <div *ngIf="isAddProduct">
+                
+            </div>
+            <div *ngIf="!isAddProduct">
+                <app-category *ngFor="let productCategory of bakeryProducts" [productCategory]="productCategory"/> 
+            </div>
+            
+        </div>
     </div>
-    <app-right-side-panel class="flex-grow "/>
+    <!-- <div *ngIf="selectBakeryS.selectBakery">
+        <div class="bg-gray-200 mx-auto">
+            <button class="p-4 px-6 {{!isAddProduct && 'bg-orange-400'}}"
+                (click)="isAddProduct = false">Смотреть</button>
+            <button class="p-4 px-6 {{isAddProduct && 'bg-orange-400'}}" (click)="isAddProduct = true">Добавить</button>
+        </div>
+        <app-category *ngFor="let productCategory of bakeryService.productCategories" [productCategory]="productCategory"/> 
+        <div></div>
+    </div> -->
+
 </div>
+<!-- <app-right-side-panel class="flex-grow "/> -->
+<!-- </div> -->

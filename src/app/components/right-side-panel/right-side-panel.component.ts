@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Modal } from 'src/app/model/modal';
+import { IProductBakery } from 'src/app/model/productBakery';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
+import { SaveProductComponent } from '../modal-dialog/save-product/save-product.component';
 
 @Component({
   selector: 'app-right-side-panel',
@@ -11,6 +13,6 @@ export class RightSidePanelComponent {
   constructor(private modalService : ModalDialogService){}
 
   addProduct(){
-    this.modalService.setModalType(Modal.addProduct);
+    this.modalService.openDialog<IProductBakery,SaveProductComponent>(undefined,SaveProductComponent).subscribe();
   }
 }

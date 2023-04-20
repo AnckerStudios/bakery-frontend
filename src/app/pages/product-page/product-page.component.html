@@ -8,7 +8,7 @@
     <div class=" absolute right-0 translate-x-1/2 w-96 h-96 object-cover rounded-full  ">
         <!-- <img  [src]="image" alt="картинка"
                 class="z-10 object-cover w-full h-full rounded-full"> -->
-        <img  src="http://localhost:8080/api/product/image/cabb627d-0e5a-4840-8c1d-b34705ee0296"  alt="картинка" class="z-10 object-cover w-full h-full rounded-full">
+        <img *ngIf="product" src="http://localhost:8080/api/product/image/{{product.id}}"  alt="картинка" class="z-10 object-cover w-full h-full rounded-full">
     </div>
     
 </div>

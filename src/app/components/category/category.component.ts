@@ -12,7 +12,5 @@ export class CategoryComponent {
   @Input() productCategory?: IProductCategories;
   constructor(public modalDialog : ModalDialogService){}
 
-  addProduct(){
-    this.modalDialog.setModalType(Modal.addProduct);
-  }
+  
 }

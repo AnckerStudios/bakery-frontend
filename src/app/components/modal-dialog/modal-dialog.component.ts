@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { ModelDirective } from 'src/app/model.directive';
 import { Modal } from 'src/app/model/modal';
+import { ModalComponent } from 'src/app/model/modal.component';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
 @Component({
@@ -10,16 +12,30 @@ import { ModalDialogService } from 'src/app/services/modal-dialog.service';
   styleUrls: ['./modal-dialog.component.css']
 })
 export class ModalDialogComponent {
-  constructor(public modalDialog: ModalDialogService){}
   Modal = Modal;
+  @ViewChild(ModelDirective) appModel!: ModelDirective;
 
-  close():void{
-    this.modalDialog.setModalType(Modal.hide);
+
+  constructor(public md: ModalDialogService) {}
+  ngOnInit(){
+    console.log("AAAAAAAAA",this.appModel);
+    this.md.component$.subscribe({
+      next: (data)=>{
+        if(data){
+        const viewContainerRef = this.appModel.viewContainerRef;
+        viewContainerRef.clear();
+        const componentRef = viewContainerRef.createComponent<ModalComponent>(data);
+        componentRef.instance!.response.subscribe(e => this.confirm(e));
+        }
+      }
+    })
   }
-
-  confirm(respons: FormGroup){
-    this.modalDialog.setResult(respons);
-    this.close();
+  confirm<T>(data: T) {
+    this.md.confirm<T>(data);
+    console.log("modal global",data);
+  }
+  close(){
+    this.md.close()
   }
 
   

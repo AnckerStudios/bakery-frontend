@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IProductCategories } from '../model/productCategories';
+import { SelectBakeryService } from './select-bakery.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BakeryService {
 
   public productCategories: IProductCategories[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private sb:SelectBakeryService) { }
 
   createBakery(newBakery: IBakery): Observable<IBakery> {
     return this.http.post<IBakery>(this.bakerysUrl, newBakery);
@@ -31,7 +32,8 @@ export class BakeryService {
   getCategories(bakery: IBakery): void {
     this.http.get<IProductCategories[]>(this.productCategoriesUrl + bakery?.id).subscribe(item => {
       this.productCategories = item;
-      console.log(this.productCategories)
+      console.log(this.productCategories);
+      // this.sb.bakery = bakery;
     });
   }
 

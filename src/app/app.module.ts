@@ -22,11 +22,16 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 import { AddCategoryComponent } from './components/modal-dialog/add-category/add-category.component';
 import { CategoryListItemComponent } from './components/category-list-item/category-list-item.component';
 import { IngredientsPageComponent } from './pages/ingredients-page/ingredients-page.component';
-import { IngredientListItemComponent } from './components/ingredient-list-item/ingredient-list-item.component';
 import { AddIngredientComponent } from './components/modal-dialog/add-ingredient/add-ingredient.component';
 import { CreateProductComponent } from './components/modal-dialog/add-product/create-product/create-product.component';
 import { SelectProductComponent } from './components/modal-dialog/add-product/select-product/select-product.component';
 import { SelectItemComponent } from './components/select-two/select-item/select-item.component';
+import { ModalFormIngredientComponent } from './pages/ingredients-page/modal-form-ingredient/modal-form-ingredient.component';
+import { GlobalErrorComponent } from './components/global-error/global-error.component';
+import { IngredientItemComponent } from './pages/ingredients-page/ingredient-item/ingredient-item.component';
+
+import { SaveProductComponent } from './components/modal-dialog/save-product/save-product.component';
+import { ModelDirective } from './model.directive';
 
 @NgModule({
   declarations: [
@@ -48,11 +53,15 @@ import { SelectItemComponent } from './components/select-two/select-item/select-
     AddCategoryComponent,
     CategoryListItemComponent,
     IngredientsPageComponent,
-    IngredientListItemComponent,
     AddIngredientComponent,
     CreateProductComponent,
     SelectProductComponent,
-    SelectItemComponent
+    SelectItemComponent,
+    ModalFormIngredientComponent,
+    GlobalErrorComponent,
+    IngredientItemComponent,
+    SaveProductComponent,
+    ModelDirective
   ],
   imports: [
     BrowserModule,

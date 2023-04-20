@@ -26,16 +26,16 @@ export class CategoryPageComponent {
     this.categories = this.categories?.filter((item) => item.id != delItemId);
   }
   addCategory(){
-    this.modalService.setModalType(Modal.addCategory).subscribe(form => {
-      console.log("Я пытаюсь добавьть ", form)
-      this.categoryService.create({
-          isDrink: form.value.isDrink,
-          name: form.value.name
-        }).subscribe(item => {
-          console.log(item);
-          this.categories?.push(item);
-        });
-    });
+    // this.modalService.setModalType(Modal.addCategory).subscribe(form => {
+    //   console.log("Я пытаюсь добавьть ", form)
+    //   this.categoryService.create({
+    //       isDrink: form.value.isDrink,
+    //       name: form.value.name
+    //     }).subscribe(item => {
+    //       console.log(item);
+    //       this.categories?.push(item);
+    //     });
+    // });
   }
 
 }

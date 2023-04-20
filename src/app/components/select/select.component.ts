@@ -18,10 +18,10 @@ export class SelectComponent {
   constructor(private modalDialog: ModalDialogService){}
 
   addBakery() : void {
-    this.modalDialog.setModalType(Modal.addBakery);
+    // this.modalDialog.setModalType(Modal.addBakery);
   }
   delBakery(bakery: IBakery) : void{
-    this.modalDialog.setModalType(Modal.delBakery);
+    // this.modalDialog.setModalType(Modal.delBakery);
   }
   changeBakery(newValue: IBakery) {
     this.selectBakery = newValue;
