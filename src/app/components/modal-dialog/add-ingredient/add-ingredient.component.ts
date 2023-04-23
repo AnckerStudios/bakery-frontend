@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IIngredient } from 'src/app/model/ingredient';
+import { ModalComponent } from 'src/app/model/modal.component';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -10,35 +11,38 @@ import { ModalService } from 'src/app/services/modal.service';
   templateUrl: './add-ingredient.component.html',
   styleUrls: ['./add-ingredient.component.css']
 })
-export class AddIngredientComponent {
-  @Output() response = new EventEmitter<FormGroup>();
-  constructor(private ingredientService: IngredientService, private ms: ModalService, private fb: FormBuilder) { }
-  ngOnInit(){
-    //this.ingredient && this.form.setValue()
-    let ingredient = this.ms.getData<IIngredient>()
-    this.setForm(ingredient);
-    console.log("Perm 2",this.form.getRawValue())
-  }
+export class AddIngredientComponent implements ModalComponent {
+  @Output() response = new EventEmitter<IIngredient>();
+  status?:string;
+  constructor(
+    private is: IngredientService,
+    private fb: FormBuilder,
+    public md: ModalDialogService){}
 
-  setForm(ingredient: IIngredient | undefined){
-    ingredient && this.form.setValue({
-      id: ingredient.id!,
-      name: ingredient.name
-    });
-  }
   form = this.fb.group({
     id: [''],
-    name: ['', [Validators.required]]
+    name: ['', [Validators.required]],
+    
   })
-  get name(){
-    return this.form.controls.name as FormControl;
+
+  ngOnInit() {
+    let ingredient = this.md.getInput<IIngredient>();
+    ingredient && this.form.setValue({
+      id: ingredient.id,
+      name: ingredient.name,
+    })
+    // this.md.inputData
   }
-  submit(){
-    if(!this.name.errors?.['required']){
-      this.ingredientService.create(this.form.getRawValue() as IIngredient)
-      .subscribe(item => {
-        this.ms.confirm<IIngredient>(item);
-      });
-    }
+  submit() {
+    this.status = 'loading'
+    this.form.valid && this.is.save(this.form.getRawValue() as IIngredient).subscribe({
+      next: (data) => {
+        this.response.emit(data);
+      },
+      error: (e) => {
+        console.error("r err", e);
+        this.status = 'error'
+      }
+    });
   }
 }

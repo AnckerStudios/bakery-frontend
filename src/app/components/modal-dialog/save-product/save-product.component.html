@@ -1,11 +1,5 @@
 <form *ngIf="form" class="flex flex-col w-full gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="flex justify-around w-full">
-        <div class="rounded-full border-dashed  w-12 h-12 flex items-center justify-center" (click)="step = false">1
-        </div>
-        <div class="rounded-full border-dashed  w-12 h-12 flex items-center justify-center" (click)="step = true">2
-        </div>
-    </div>
-    <div *ngIf="!step" class="flex justify-between flex-grow w-full gap-4">
+    <div  class="flex justify-between flex-grow w-full gap-4">
         <div class=" " (click)="filePicker.click()">
             <div class="border-dashed border-4 w-52 h-52 rounded-xl select-none">
                 <div *ngIf="imagePreview !== '' && imagePreview" class="w-full h-full flex items-center justify-center">
@@ -20,25 +14,31 @@
 
             <input type="file" (change)="onImagePicked($event)" #filePicker hidden>
         </div>
-        <div class="flex flex-col justify-around flex-grow">
+        <div class="flex flex-col justify-around flex-grow gap-2">
+        <div class="flex flex-col justify-around flex-grow" formGroupName="product">
             <input type="text" class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200"
                 placeholder="Название" formControlName="name">
+            <input type="number" class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200"
+                    placeholder="volume" formControlName="volume">
             <select class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200"
                 formControlName="category">
-                <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+                <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
             </select>
-            <div class="flex gap-4">
-                <p>Цена:</p>
-                <input type="number" class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200"
-                    placeholder="Название" formControlName="price">
-            </div>
+        </div>
+        <div *ngIf="selectBakery" class="flex gap-4">
+            <p>Цена:</p>
+            <input type="number" class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200"
+                placeholder="цена" formControlName="price">
         </div>
     </div>
-    <div *ngIf="step" class="w-full rounded-2xl bg-gray-200 h-52 p-4 overflow-auto shadow-inner">
+    </div>
+    <p class="text-xl font-bold">Ингредиенты:</p>
+    <div  class="w-full rounded-2xl bg-gray-200 h-52 p-4 overflow-auto shadow-inner">
+       
         <div class="grid grid-cols-2 gap-4">
             <button type="button" *ngFor="let ingredient of ingredients" class="p-2  rounded-xl shadow-lg {{isSelect(ingredient) ? 'bg-orange-200 font-bold':'bg-white'}}" (click)="isSelect(ingredient) ? delIngredient(ingredient) : addIngredient(ingredient)">{{ingredient.name}}</button>
         </div>
     </div>
-    <button *ngIf="step"  type="submit" class="p-4 rounded-xl bg-orange-200">Добавить</button>
+    <button   type="submit" class="p-4 rounded-xl bg-orange-200">Добавить</button>
     <div>{{form.value | json}}</div>
 </form>

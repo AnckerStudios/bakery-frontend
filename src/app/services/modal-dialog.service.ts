@@ -15,7 +15,7 @@ export class ModalDialogService {
   getInput<T>(): T{
     return this.inputData as T;
   }
-  openDialog<T,U>(obj: T | undefined, type: Type<U>): Subject<T>{
+  openDialog<T>(obj: T | undefined,type: Type<any>): Subject<T>{
     this.inputData = obj;
     this.component$.next(type);
     return this.res = new Subject<T>();

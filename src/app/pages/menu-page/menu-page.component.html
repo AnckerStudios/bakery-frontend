@@ -1,61 +1,59 @@
-<div class="max-w-2xl container mx-auto pt-20 flex ">
-    <!-- <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/> -->
-    <!-- <div class="max-w-2xl flex-grow-0 container "> -->
-    <div *ngIf="allProducts" class="w-full flex flex-col gap-10">
+<div class="max-w-5xl mx-auto pt-20 flex">
+    <div class="sticky top-20 flex-grow rounded-2xl h-20 p-4  flex flex-col gap-4">
         <app-select-two />
-        <div *ngIf="!bakeryProducts" class="grid grid-cols-3 gap-4">
-            <div *ngFor="let product of allProducts" class="group h-64 hover:scale-110 relative">
+        <input class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" [(ngModel)]="term"
+            placeholder="Поиск" />
 
+        <div (click)="create()"
+            class="rounded-lg border-dashed border-2 flex flex-col items-center hover:scale-110 hover:border-red-800 cursor-pointer pb-10 select-none">
 
-                <div class="flex items-center flex-col w-full h-full p-1 justify-end relative"
-                    routerLink="/product/{{product.id}}">
-                    <div class=" absolute top-0 w-40 h-40 object-cover rounded-full  ">
-                        <img src="http://localhost:8080/api/product/image/{{product.id}}" alt="картинка"
-                            class="z-10 object-cover w-full h-full rounded-full">
-
-                    </div>
-
-
-                    <div
-                        class="flex items-center flex-col w-full h-2/3 rounded-2xl shadow-xl justify-end bottom-0 group-hover:border-red-800 group-hover:border-2 border ">
-                        <h2 class="z-10 text-2xl pb-1"><strong>{{product.name}}</strong></h2>
-                        <p class="z-10 text-xs">{{product.volume}} {{product.category?.isDrink ? 'мл' : 'г'}}</p>
-                    </div>
-                </div>
-                <div class="absolute bottom-2/3 right-2 text-gray-400 font-semibold">
-                    ✕
-                </div>
+            <h1 class="font-bold text-9xl underline-offset-0 text-gray-300 text-clip">+</h1>
+            <h1 class="font-bold text-xl text-gray-300 text-clip ">Добавить</h1>
 
 
 
-            </div>
-
-        </div>
-        <div *ngIf="bakeryProducts" class="w-full">
-            <div class="bg-gray-200 mx-auto">
-                <button class="p-4 px-6 {{!isAddProduct && 'bg-orange-400'}}"
-                    (click)="isAddProduct = false">Смотреть</button>
-                <button class="p-4 px-6 {{isAddProduct && 'bg-orange-400'}}" (click)="isAddProduct = true">Добавить</button>
-            </div>
-            <div *ngIf="isAddProduct">
-                
-            </div>
-            <div *ngIf="!isAddProduct">
-                <app-category *ngFor="let productCategory of bakeryProducts" [productCategory]="productCategory"/> 
-            </div>
-            
         </div>
     </div>
-    <!-- <div *ngIf="selectBakeryS.selectBakery">
-        <div class="bg-gray-200 mx-auto">
-            <button class="p-4 px-6 {{!isAddProduct && 'bg-orange-400'}}"
-                (click)="isAddProduct = false">Смотреть</button>
-            <button class="p-4 px-6 {{isAddProduct && 'bg-orange-400'}}" (click)="isAddProduct = true">Добавить</button>
+    <!-- <input class="sticky top-20 rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" [(ngModel)]="term"/> -->
+    <div class=" max-w-2xl container   flex flex-col">
+        <!-- <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/> -->
+        <!-- <div class="max-w-2xl flex-grow-0 container "> -->
+        <div class="flex justify-between p-2">
+            <p class="text-5xl font-bold ">Товары {{selectedBakery?.name}}</p>
+            <div *ngIf="selectedBakery" class="w-10 cursor-pointer select-none">
+                <span *ngIf="isShow" class="material-symbols-outlined text-5xl" (click)="change(!isShow)">
+                    visibility_off
+                    </span>
+                <span *ngIf="!isShow" class="material-symbols-outlined text-5xl" (click)="change(!isShow)">
+                    visibility
+                    </span>
+            </div>
         </div>
-        <app-category *ngFor="let productCategory of bakeryService.productCategories" [productCategory]="productCategory"/> 
-        <div></div>
-    </div> -->
+
+
+
+        <div *ngIf="allProducts | keyvalue as products" class="w-full flex flex-col gap-10">
+
+
+
+            <div *ngIf="products | filterCategory:term as filterProducts">
+                <div *ngFor="let category of filterProducts" class="flex flex-col">
+                    <div class="text-2xl my-6 font-semibold">{{category.key}}</div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <app-product *ngFor="let productPrice of category.value " [productPrice]="productPrice" (eventDelete)="del($event)" (eventEdit)="edit($event)"
+                            (click)="!isShow && add(productPrice)" />
+                    </div>
+                </div>
+                <div *ngIf="!filterProducts.length">
+                    Таких булочек пока нет
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 
 </div>
+
 <!-- <app-right-side-panel class="flex-grow "/> -->
 <!-- </div> -->

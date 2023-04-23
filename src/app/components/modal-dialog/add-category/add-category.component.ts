@@ -1,35 +1,49 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ICategory } from 'src/app/model/category';
+import { ModalComponent } from 'src/app/model/modal.component';
 import { CategoryService } from 'src/app/services/category.service';
+import { ModalDialogService } from 'src/app/services/modal-dialog.service';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.css']
 })
-export class AddCategoryComponent {
-  @Output() response = new EventEmitter<FormGroup>();
-  form = new FormGroup({
-    name: new FormControl<string>('', [
-      Validators.required,
-      Validators.min(8)
-    ]),
-    isDrink: new FormControl<boolean>(false, [
-      Validators.required
-    ])
+export class AddCategoryComponent implements ModalComponent {
+  @Output() response = new EventEmitter<ICategory>();
+  status?:string;
+  constructor(
+    private categoruService: CategoryService,
+    private fb: FormBuilder,
+    public md: ModalDialogService){}
+
+  form = this.fb.group({
+    id: [''],
+    name: ['', [Validators.required]],
+    isDrink: [false, [Validators.required]]
   })
-  get name(){
-    return this.form.controls.name as FormControl;
+
+  ngOnInit() {
+    let category = this.md.getInput<ICategory>();
+    category && this.form.setValue({
+      id: category.id,
+      name: category.name,
+      isDrink: category.isDrink
+
+    })
+    // this.md.inputData
   }
-  get isDrink(){
-    return this.form.value.isDrink;
-  }
-  set isDrink(isDrink){
-    this.form.value.isDrink = isDrink;
-  }
-  submit(){
-    if(!this.name.errors?.['required']){
-      this.response.emit(this.form);
-    }
+  submit() {
+    this.status = 'loading'
+    this.form.valid && this.categoruService.save(this.form.getRawValue() as ICategory).subscribe({
+      next: (data) => {
+        this.response.emit(data);
+      },
+      error: (e) => {
+        console.error("r err", e);
+        this.status = 'error'
+      }
+    });
   }
 }

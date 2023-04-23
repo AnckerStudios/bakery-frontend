@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subject, take, takeUntil } from 'rxjs';
+import { AddIngredientComponent } from 'src/app/components/modal-dialog/add-ingredient/add-ingredient.component';
 import { IIngredient } from 'src/app/model/ingredient';
 import { Modal } from 'src/app/model/modal';
 import { IngredientService } from 'src/app/services/ingredient.service';
@@ -13,63 +14,29 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./ingredients-page.component.css']
 })
 export class IngredientsPageComponent {
-  constructor(private ingredientService: IngredientService, public modalService: ModalDialogService, private fb: FormBuilder, private ms: ModalService) { }
-  selectIngredient?: IIngredient;
-  loadIngredients: string[] = [];
+  constructor(private ingredientService: IngredientService, private ms: ModalDialogService){}
+  
   ingredients?: IIngredient[];
-  notifier$ = new Subject();
+
   ngOnInit(): void {
     this.getIngredients();
   }
-  find(item: IIngredient) {
-    return this.loadIngredients.find(x => x === item.id);
+  
+  getIngredients(){
+    this.ingredientService.getIngredients().subscribe(item => {this.ingredients = item;
+    console.log(this.ingredients)});
   }
-  submit(ingredient: IIngredient) {
-    this.ingredientService.create(ingredient).subscribe(item => {
-      console.log(item);
-      this.ingredients?.push(item);
-    });
+  del(delItemId: string){
+    this.ingredients = this.ingredients?.filter((item) => item.id != delItemId);
   }
-  getIngredients() {
-    this.ingredientService.getIngredients()
-      .pipe(takeUntil(this.notifier$))
-      .subscribe(item => {
-        this.ingredients = item;
-        console.log(this.ingredients)
-      });
-  }
-  delIngredient(delId: string) {
-    this.loadIngredients.push(delId);
-    console.log("arr", this.loadIngredients)
-    this.ingredientService.delete(delId)
-      .subscribe(item => {
-        console.log("delete ", item);
-        this.ingredients = this.ingredients?.filter((item) => item.id != delId);
-      });
-  }
-  saveIngredient(ingredient: IIngredient) {
-    ingredient.id && this.loadIngredients.push(ingredient.id);
-    console.log("arr", this.loadIngredients)
-    this.ingredientService.create(ingredient)
-      .subscribe(item => {
-        let index = this.ingredients?.findIndex(x => x.id === item.id);
-        index !== -1 ? this.ingredients?.splice(index!, 1, item) : this.ingredients?.push(item);
-        this.loadIngredients = this.loadIngredients.filter(x => x !== item.id);
-      });
+  add(){
+    this.ms.openDialog<IIngredient>(undefined,AddIngredientComponent).subscribe({
+      next:(data)=>{
+        this.ingredients?.push(data);
+      },
+      error:e=>{
 
-  }
-  onSave(ingredient?: IIngredient) {
-    this.ms.open<IIngredient>(ingredient, Modal.addIngredient).subscribe((data) => {
-      console.log("MODAL 3.0",data)
-      let index = this.ingredients?.findIndex(x => x.id === data.id);
-      index !== -1 ? this.ingredients?.splice(index!, 1, data) : this.ingredients?.push(data);
-      this.loadIngredients = this.loadIngredients.filter(x => x !== data.id);
-    });
-    this.selectIngredient = ingredient;
-    // this.modalService.modalType = Modal.addIngredient;
-  }
-
-  ngOnDestroy() {
-    this.notifier$.complete();
+      }
+    })
   }
 }

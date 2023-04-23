@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ICategory } from 'src/app/model/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { ModalDialogService } from 'src/app/services/modal-dialog.service';
+import { AddCategoryComponent } from '../modal-dialog/add-category/add-category.component';
 
 @Component({
   selector: 'app-category-list-item',
@@ -11,31 +13,36 @@ import { CategoryService } from 'src/app/services/category.service';
 export class CategoryListItemComponent {
   @Input() category?: ICategory;
   @Output() delCategoryItem = new EventEmitter<string>();
-  constructor(private categoryService: CategoryService){}
+  status?:string;
+  constructor(
+    private categoryService: CategoryService,
+    public ms: ModalDialogService
+    ){}
   ngOnInit(){
     console.log(this.category)
     
   }
-  isEdit: boolean = false;
-  onEdit(){
-    this.isEdit = true;
+ 
+ 
+  del(){
+    this.status = 'loading';
+    this.categoryService.delete(this.category!).subscribe({
+      next: ()=> {
+        this.delCategoryItem.emit(this.category?.id)
+      },
+      error: e=>{
+        this.status = 'error'
+      }
+    });
+
   }
-  delCategory(){
-    if(this.category && this.category.id){
-      this.categoryService.delete(this.category.id).subscribe(()=> this.delCategoryItem.emit(this.category?.id));
-    }
+  edit(){
+    this.ms.openDialog<ICategory>(this.category,AddCategoryComponent).subscribe({
+      next:(data)=>{
+        this.category = data;
+      }
+    })
   }
-  updateCategory(){
-    if(this.category){
-      console.log(this.category)
-      this.categoryService.update(this.category).subscribe();
-      this.isEdit = false;
-    }
-  }
-  changeIsDrink(){
-    if(this.category){
-      this.category.isDrink = !this.category.isDrink;
-    }
-  }
+ 
 
 }

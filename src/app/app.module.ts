@@ -8,14 +8,10 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryComponent } from './components/category/category.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-import { SelectComponent } from './components/select/select.component';
 import { AddBakeryComponent } from './components/modal-dialog/add-bakery/add-bakery.component';
 import { AddProductComponent } from './components/modal-dialog/add-product/add-product.component';
-import { DelBakeryComponent } from './components/modal-dialog/del-bakery/del-bakery.component';
 import { RightSidePanelComponent } from './components/right-side-panel/right-side-panel.component';
 import { SelectTwoComponent } from './components/select-two/select-two.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
@@ -27,11 +23,12 @@ import { CreateProductComponent } from './components/modal-dialog/add-product/cr
 import { SelectProductComponent } from './components/modal-dialog/add-product/select-product/select-product.component';
 import { SelectItemComponent } from './components/select-two/select-item/select-item.component';
 import { ModalFormIngredientComponent } from './pages/ingredients-page/modal-form-ingredient/modal-form-ingredient.component';
-import { GlobalErrorComponent } from './components/global-error/global-error.component';
 import { IngredientItemComponent } from './pages/ingredients-page/ingredient-item/ingredient-item.component';
 
 import { SaveProductComponent } from './components/modal-dialog/save-product/save-product.component';
 import { ModelDirective } from './model.directive';
+import { FilterCategoryPipe } from './pipes/filter-category.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +37,9 @@ import { ModelDirective } from './model.directive';
     ProductPageComponent,
     MenuPageComponent,
     NavBarComponent,
-    MenuComponent,
-    CategoryComponent,
     ModalDialogComponent,
-    SelectComponent,
     AddBakeryComponent,
     AddProductComponent,
-    DelBakeryComponent,
     RightSidePanelComponent,
     SelectTwoComponent,
     CategoryPageComponent,
@@ -58,10 +51,11 @@ import { ModelDirective } from './model.directive';
     SelectProductComponent,
     SelectItemComponent,
     ModalFormIngredientComponent,
-    GlobalErrorComponent,
     IngredientItemComponent,
     SaveProductComponent,
-    ModelDirective
+    ModelDirective,
+    FilterCategoryPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

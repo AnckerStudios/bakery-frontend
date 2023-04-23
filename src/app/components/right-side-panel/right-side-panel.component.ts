@@ -13,6 +13,6 @@ export class RightSidePanelComponent {
   constructor(private modalService : ModalDialogService){}
 
   addProduct(){
-    this.modalService.openDialog<IProductBakery,SaveProductComponent>(undefined,SaveProductComponent).subscribe();
+    this.modalService.openDialog<IProductBakery>(undefined, SaveProductComponent).subscribe();
   }
 }

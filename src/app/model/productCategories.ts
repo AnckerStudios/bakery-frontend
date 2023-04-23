@@ -3,7 +3,8 @@ import { ICategory } from "./category";
 import { IProduct } from "./product";
 import { IProductBakery } from "./productBakery";
 
-export interface IProductCategories{
-    category: ICategory,
-    productBakerys: IProductBakery[]
+export interface IProductPrice{
+    product: IProduct,
+    price?: number,
+    inBakery: boolean
 }

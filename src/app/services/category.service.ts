@@ -14,13 +14,13 @@ export class CategoryService {
   getCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(this.categoryURL);
   }
-  create(body:ICategory): Observable<ICategory> {
+  save(body:ICategory): Observable<ICategory> {
     return this.http.post<ICategory>(this.categoryURL,body);
   }
   update(body:ICategory): Observable<ICategory>{
     return this.http.put<ICategory>(this.categoryURL,body);
   }
-  delete(id: string){
-    return this.http.delete<ICategory>(this.categoryURL,{ params: new HttpParams().set('id', id)});
+  delete(category: ICategory): Observable<ICategory>{
+    return this.http.delete<ICategory>(this.categoryURL,{ params: new HttpParams().set('id', category.id)});
   }
 }

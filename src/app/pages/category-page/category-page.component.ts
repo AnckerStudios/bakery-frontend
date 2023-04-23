@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { AddCategoryComponent } from 'src/app/components/modal-dialog/add-category/add-category.component';
+import { AddIngredientComponent } from 'src/app/components/modal-dialog/add-ingredient/add-ingredient.component';
 import { ICategory } from 'src/app/model/category';
+import { IIngredient } from 'src/app/model/ingredient';
 import { Modal } from 'src/app/model/modal';
 import { CategoryService } from 'src/app/services/category.service';
 import { ModalDialogService } from 'src/app/services/modal-dialog.service';
@@ -10,7 +13,7 @@ import { ModalDialogService } from 'src/app/services/modal-dialog.service';
   styleUrls: ['./category-page.component.css']
 })
 export class CategoryPageComponent {
-  constructor(private categoryService: CategoryService, private modalService: ModalDialogService){}
+  constructor(private categoryService: CategoryService, private ms: ModalDialogService){}
   
   categories?: ICategory[];
 
@@ -26,16 +29,14 @@ export class CategoryPageComponent {
     this.categories = this.categories?.filter((item) => item.id != delItemId);
   }
   addCategory(){
-    // this.modalService.setModalType(Modal.addCategory).subscribe(form => {
-    //   console.log("Я пытаюсь добавьть ", form)
-    //   this.categoryService.create({
-    //       isDrink: form.value.isDrink,
-    //       name: form.value.name
-    //     }).subscribe(item => {
-    //       console.log(item);
-    //       this.categories?.push(item);
-    //     });
-    // });
+    this.ms.openDialog<ICategory>(undefined,AddCategoryComponent).subscribe({
+      next:(data)=>{
+        this.categories?.push(data);
+      },
+      error:e=>{
+
+      }
+    })
   }
 
 }
