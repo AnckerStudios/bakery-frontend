@@ -1,8 +1,0 @@
-<form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col items-center gap-4">
-    <input type="text" class="rounded-2xl border w-full px-4 py-2 bg-gray-200 " 
-        placeholder="Название"
-        formControlName="name">
-        <!-- <p class="text-red-600 font-medium" *ngIf="name.errors?.['required']">Введите название нового ингредиента</p> -->
-    <button type="submit"
-        class="rounded-2xl border h-full  px-6 py-2 bg-orange-300"><strong>Создать</strong></button>
-</form>

@@ -1,17 +1,11 @@
-<div class="w-full h-20 shadow-lg fixed z-20 bg-white flex items-center">
-        <div class="max-w-2xl container mx-auto h-12">
-            <!-- <app-select-two [bakerys]="bakerys"/> -->
-
-        </div>
-        <div class="absolute right-0">
-            <div routerLink="/">
-                Товары
-            </div>
-            <div routerLink="/categories">
-                Категории
-            </div>
-            <div routerLink="/ingredients">
-                Ингредиенты
-            </div>
-        </div>
+<div class="w-full h-20 shadow-lg fixed z-20 bg-white flex items-center justify-center gap-10">
+    <div routerLinkActive="text-red-800" routerLink="/product" class="text-4xl font-bold cursor-pointer text-gray-300" >
+        Товары
+    </div>
+    <div routerLinkActive="text-red-800" routerLink="/categories" class="text-4xl font-bold cursor-pointer text-gray-300" >
+        Категории
+    </div>
+    <div routerLinkActive="text-red-800" routerLink="/ingredients" class="text-4xl font-bold cursor-pointer text-gray-300">
+        Ингредиенты
+    </div>
 </div>

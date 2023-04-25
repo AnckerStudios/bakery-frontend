@@ -1,7 +1,5 @@
 import { Injectable, Type } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { Modal } from '../model/modal';
 
 @Injectable({
   providedIn: 'root'

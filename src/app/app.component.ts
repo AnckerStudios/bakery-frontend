@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { IBakery } from './model/bakery';
-import { Modal } from './model/modal';
 import { ModalDialogService } from './services/modal-dialog.service';
 
 @Component({
@@ -10,6 +8,4 @@ import { ModalDialogService } from './services/modal-dialog.service';
 })
 export class AppComponent {
   constructor(public modalDialog: ModalDialogService){}
-
-  
 }

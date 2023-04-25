@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 import { IBakery } from 'src/app/model/bakery';
 import { ICategory } from 'src/app/model/category';
 import { IIngredient } from 'src/app/model/ingredient';
@@ -18,8 +19,9 @@ import { SelectBakeryService } from 'src/app/services/select-bakery.service';
   templateUrl: './save-product.component.html',
   styleUrls: ['./save-product.component.css']
 })
-export class SaveProductComponent implements ModalComponent {
+export class SaveProductComponent implements ModalComponent, OnInit, OnDestroy {
   @Output() response = new EventEmitter<IProductPrice>();
+  mes = '';
   constructor(
     private categoryService: CategoryService,
     private ingredientService: IngredientService,
@@ -51,6 +53,8 @@ export class SaveProductComponent implements ModalComponent {
   ingredients?: IIngredient[];
   step = false;
   selectBakery?: IBakery;
+  private readonly destroy$ = new Subject<void>();
+
   ngOnInit() {
     console.log("form", this.form);
 
@@ -86,11 +90,11 @@ export class SaveProductComponent implements ModalComponent {
   getImage() {
     const reader = new FileReader();
     reader.onload = () => {
-        this.imagePreview = reader.result as string;
+      this.imagePreview = reader.result as string;
     };
     this.productService.getImage(this.form.value.product?.id as string).subscribe(item => {
-        reader.readAsDataURL(new Blob([item]));
-        this.selectFile = new File([item],'file',{ type: 'image/png', lastModified: new Date().getDate() });
+      reader.readAsDataURL(new Blob([item]));
+      this.selectFile = new File([item], 'file', { type: 'image/png', lastModified: new Date().getDate() });
     });
   }
   setIngredients(ingredients: IIngredient[]) {
@@ -109,7 +113,7 @@ export class SaveProductComponent implements ModalComponent {
     });
   }
 
-  
+
   get formIngredients() {
     return this.form?.get('product')?.get('ingredients') as FormArray;
   }
@@ -134,18 +138,28 @@ export class SaveProductComponent implements ModalComponent {
   }
 
   onSubmit() {
+    if (!this.form?.valid) {
+      this.mes = 'Заполните все поля'
+      return;
+    }
+    if (!this.selectFile) {
+      this.mes = 'Выберете изображение'
+      return;
+    }
+    //this.selectFile
+    let product: IProduct = {
+      id: this.form.value.product?.id!,
+      name: this.form.value.product?.name!,
+      category: this.categories?.find(x => x.id == this.form.value.product?.category!),
+      volume: this.form.value.product?.volume!,
+      ingredients: this.form.getRawValue().product?.ingredients as IIngredient[]
+    }
 
-    if (this.form?.valid && this.selectFile) { //this.selectFile
-      let product : IProduct = {
-        id: this.form.value.product?.id!,
-        name: this.form.value.product?.name!,
-        category: this.categories?.find(x=>x.id == this.form.value.product?.category!),
-        volume: this.form.value.product?.volume!,
-        ingredients: this.form.getRawValue().product?.ingredients as IIngredient[]
-      }
-
-      if(this.selectBakery){
-        this.productService.createProduct(this.selectFile,product,this.selectBakery,this.form.value.price!)
+    if (this.selectBakery) {
+      this.productService.createProduct(this.selectFile, product, this.selectBakery, this.form.value.price!)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
         .subscribe({
           next: (data) => {
             this.response.emit({
@@ -156,8 +170,11 @@ export class SaveProductComponent implements ModalComponent {
           },
           error: (e) => console.error("r err", e)
         })
-      }else{
-        this.productService.saveProduct(this.selectFile,product)
+    } else {
+      this.productService.saveProduct(this.selectFile, product)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
         .subscribe({
           next: (data) => {
             this.response.emit({
@@ -168,14 +185,16 @@ export class SaveProductComponent implements ModalComponent {
           },
           error: (e) => console.error("r err", e)
         })
-      }
-     
+
+
 
       // this.productService.createProduct(this.selectFile!,this.form.getRawValue() as IProduct,this.selectBakery, this.form.value.price).subscribe()
 
     }
 
-
-    console.log(this.form);
+  }
+  ngOnDestroy(){
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

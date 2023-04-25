@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ICategory } from '../model/category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private categoryURL = 'http://localhost:8080/api/category';
+  private categoryURL =  `${environment.apiUrl}/api/category`;
+  categories: string[] = [];
   constructor( private http: HttpClient) { }
 
   getCategories(): Observable<ICategory[]> {

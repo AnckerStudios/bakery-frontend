@@ -1,5 +1,6 @@
-<div class="w-full h-12 relative items-center z-20" >
-    <div class="absolute top-0 w-full min-h-full rounded-2xl bg-white {{isOpen ? 'shadow-lg' : 'rounded-2xl'}} select-none" >
+<div class="w-full h-12 relative items-center z-20">
+    <div
+        class="absolute top-0 w-full min-h-full rounded-2xl bg-white {{isOpen ? 'shadow-lg' : 'rounded-2xl'}} select-none">
         <div class="h-12 p-3 bg-slate-300 {{isOpen ? 'rounded-t-2xl' : 'rounded-2xl'}} " (click)="isOpen = !isOpen">
             <strong>
                 <span *ngIf="selectBakery">{{selectBakery.name}}</span>
@@ -7,22 +8,25 @@
             </strong>
         </div>
         <div *ngIf="isOpen" class="flex flex-col">
-            <div class="h-12 p-3 hover:bg-zinc-200" (click)="addBakery()"><strong>Добавить новую пекарню +</strong></div>
+            <div class="h-12 p-3 hover:bg-zinc-200" (click)="addBakery()"><strong>Добавить новую пекарню +</strong>
+            </div>
             <div class="h-12 p-3 hover:bg-zinc-200" (click)="changeBakery(undefined)"><strong>Все товары</strong></div>
             <div *ngIf="!bakerys" class="h-12 p-3  items-center">
-                <app-loading *ngIf="!status" class="h-12 w-full relative hover:bg-zinc-200"/>
-                <div *ngIf="status == 'error'"  class="h-12 font-bold font-sans justify-center flex gap-4 text-red-600 ">
+                <app-loading *ngIf="!status" class="h-12 w-full relative hover:bg-zinc-200" />
+                <div *ngIf="status == 'error'" class="h-12 font-bold font-sans justify-center flex gap-4 text-red-600 ">
                     Ошибка!
                     <span class="material-symbols-outlined hover:text-green-700" (click)=" getBakerys()">
                         restart_alt
                     </span>
                 </div>
             </div>
-            
-            <app-select-item *ngFor="let bakery of bakerys" [bakery]="bakery" (change)="changeBakery($event)" (eventDel)="delBakery($event)"/>
+            <div *ngIf="bakerys">
+                <app-select-item *ngFor="let bakery of bakerys; let i = index" [bakery]="bakery"
+                (change)="changeBakery($event)" (eventDel)="delBakery($event)" [rounding]="i==bakerys.length-1" />
+            </div>
 
         </div>
     </div>
-    
-    
+
+
 </div>

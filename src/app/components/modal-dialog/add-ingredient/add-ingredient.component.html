@@ -1,18 +1,19 @@
 <div class="relative">
-    <form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col gap-4 items-center {{status && 'invisible'}}">
-        <div class="text-3xl">{{form.value.id ? 'Редактирование':'Добавление'}}</div>
-        <input type="text" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" 
-            placeholder="Название"
+    <form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col items-center {{status && 'invisible'}}">
+        <div class="text-3xl font-bold mt-2 mb-8">{{form.value.id ? 'Редактирование':'Добавление'}}</div>
+        <input type="text" class="rounded-2xl border h-full px-4 py-2 bg-gray-200" placeholder="Название"
             formControlName="name">
-        <button type="submit"
-            class="rounded-2xl border h-full px-4 py-2 bg-orange-300"><strong>{{form.value.id ? 'Редактировать':'Добавить'}}</strong></button>
+        <div class="text-red-700 w-full mt-8">{{mes}}</div>
+        <button type="submit" class="rounded-2xl border h-full px-4 py-2 bg-orange-300"><strong>{{form.value.id ?
+                'Редактировать':'Добавить'}}</strong></button>
     </form>
-        <app-loading *ngIf="status == 'loading'" class="absolute top-1/2 right-1/2 -translate-x-1/2 translate-y-1/2"/>
-    
-        <div *ngIf="status == 'error'" class="absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2"> 
-            <div class=" font-bold text-5xl font-sans flex justify-center bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent p-4">
-                Ошибка!
-            </div>
-            <button (click)="md.close()" >ok</button>
-           </div>
+    <app-loading *ngIf="status == 'loading'" class="absolute top-1/2 right-1/2 -translate-x-1/2 translate-y-1/2" />
+
+    <div *ngIf="status == 'error'" class="absolute right-1/2 top-1/2 translate-x-1/2 -translate-y-1/2">
+        <div
+            class=" font-bold text-5xl font-sans flex justify-center bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent p-4">
+            Ошибка!
+        </div>
+        <button (click)="md.close()">ok</button>
     </div>
+</div>

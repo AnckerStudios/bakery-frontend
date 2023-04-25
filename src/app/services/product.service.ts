@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../model/product';
 import { Observable, of, reduce } from 'rxjs';
-import { products } from '../data/products';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IProductBakery } from '../model/productBakery';
 import { BakeryService } from './bakery.service';
 import { IBakery } from '../model/bakery';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  url = 'http://localhost:8080/api/product';
+  url = `${environment.apiUrl}/api/product`;
   
  
   constructor( private http: HttpClient) { }

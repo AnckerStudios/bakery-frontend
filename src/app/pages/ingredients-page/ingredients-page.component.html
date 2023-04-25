@@ -1,14 +1,68 @@
-<div class="max-w-2xl container mx-auto pt-20 flex flex-col">
+<!-- <div class="max-w-2xl container mx-auto pt-20 flex flex-col">
     <div class="mt-5 flex flex-col gap-4">
-    
-            <app-ingredient-item *ngFor="let ingredient of ingredients" [ingredient]="ingredient" (eventDel)="del($event)" />
+
+        <app-ingredient-item *ngFor="let ingredient of ingredients" [ingredient]="ingredient"
+            (eventDel)="del($event)" />
 
         <div (click)="add()" class="rounded-xl border-dashed border-2 p-4 px-6">
             add
         </div>
     </div>
 
-</div>
+</div> -->
 <!-- <app-modal-dialog *ngIf="modalService.isVisible()">
     <app-modal-form-ingredient [ingredient]="selectIngredient" (response)="saveIngredient($event)" />
 </app-modal-dialog> -->
+
+
+<div class="max-w-5xl mx-auto pt-20 flex">
+    <div class="sticky top-20 flex-grow rounded-2xl h-20 p-4  flex flex-col gap-4">
+        <input class="rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" [(ngModel)]="term"
+            placeholder="Поиск" />
+
+        <div (click)="add()"
+            class="rounded-lg border-dashed border-2 flex flex-col items-center hover:scale-110 hover:border-red-800 cursor-pointer pb-10 select-none">
+
+            <h1 class="font-bold text-9xl underline-offset-0 text-gray-300 text-clip">+</h1>
+            <h1 class="font-bold text-xl text-gray-300 text-clip ">Добавить ингредиент</h1>
+
+
+
+        </div>
+    </div>
+    <!-- <input class="sticky top-20 rounded-2xl w-full px-4 py-2 bg-gray-200 outline-none focus:bg-blue-200" [(ngModel)]="term"/> -->
+    <div class=" max-w-2xl container   flex flex-col">
+        <!-- <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/> -->
+        <!-- <div class="max-w-2xl flex-grow-0 container "> -->
+        <div class="flex justify-between p-2">
+            <p class="text-5xl font-bold ">Ингредиенты </p>
+        </div>
+        <div *ngIf="ingredients" class="w-full flex flex-col gap-10">
+            <app-ingredient-item *ngFor="let ingredient of ingredients | filterIngredient:term" [ingredient]="ingredient" 
+            (eventDel)="del($event)" />
+
+
+
+            <div *ngIf="!ingredients.length">
+                Пока что нет ни одного ингредиента 
+            </div>
+
+        </div>
+        <div *ngIf="!ingredients" class="w-full">
+            <app-loading *ngIf="!status" />
+
+            <div *ngIf="status == 'error'"
+                class="h-12 font-bold font-sans justify-center flex gap-4 text-red-600 select-none ">
+                Ошибка!
+                <span class="material-symbols-outlined hover:text-green-700 cursor-pointer" (click)=" getIngredients()">
+                    restart_alt
+                </span>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
