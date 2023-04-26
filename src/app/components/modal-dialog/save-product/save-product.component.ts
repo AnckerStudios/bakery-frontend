@@ -81,7 +81,7 @@ export class SaveProductComponent implements ModalComponent, OnInit, OnDestroy {
     }
     this.getCategories();
     this.getIngredients();
-    this.getImage();
+    this.form.value.product?.id && this.getImage();
   }
   trackByItems(index: number, item: IIngredient): string {
     return item.id as string;

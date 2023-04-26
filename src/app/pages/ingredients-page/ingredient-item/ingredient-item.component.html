@@ -1,6 +1,6 @@
 <div *ngIf="ingredient" class="rounded-xl shadow-lg  flex bg relative border" >
     <div class="p-4 px-6 flex flex-col w-full h-full gap-2">
-        <strong  class="py-2">{{ingredient.name}}</strong>
+        <strong  class="py-2 whitespace-nowrap overflow-hidden overflow-ellipsis">{{ingredient.name}}</strong>
     </div>
     <div class=" absolute right-3 top-1/2 -translate-y-1/2 flex gap-4 select-none">
         <span *ngIf="!status" class="material-symbols-outlined text-gray-400 text-base font-semibold hover:text-orange-500 cursor-pointer" (click)="edit()">

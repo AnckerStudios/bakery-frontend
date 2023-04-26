@@ -1,7 +1,7 @@
 <div *ngIf="category" class="rounded-xl shadow-lg  flex bg relative border" >
     <div class="p-4 px-6 flex flex-col w-full h-full gap-2">
         <div class="text-xs">{{category.isDrink ? 'Напитки' : 'Еда'}}</div>
-        <strong  class="py-2">{{category.name}}</strong>
+        <strong  class="py-2 whitespace-nowrap overflow-hidden overflow-ellipsis">{{category.name}}</strong>
     </div>
     <div class=" absolute right-3 top-1/2 -translate-y-1/2 flex gap-4 select-none">
         

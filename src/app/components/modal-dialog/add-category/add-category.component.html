@@ -2,7 +2,7 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col items-center {{status && 'invisible'}}">
         <div class="text-3xl mb-8 mt-2 font-bold">{{form.value.id ? 'Редактирование':'Добавление'}}</div>
         <div class="flex flex-col gap-4">
-            <input type="text" class="rounded-2xl border h-full px-4 py-2 bg-gray-200" placeholder="Название"
+            <input type="text" maxlength="100" class="rounded-2xl border h-full px-4 py-2 bg-gray-200" placeholder="Название"
                 formControlName="name">
             <div class="rounded-2xl bg-gray-200 w-full flex cursor-pointer select-none shadow-inner"
                 (click)="changeDrink()">

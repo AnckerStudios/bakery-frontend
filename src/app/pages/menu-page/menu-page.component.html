@@ -18,8 +18,12 @@
     <div class=" max-w-2xl container   flex flex-col">
         <!-- <app-menu class="flex-grow" [productCategories]="bakeryService.productCategories"/> -->
         <!-- <div class="max-w-2xl flex-grow-0 container "> -->
-        <div class="flex justify-between p-2">
-            <p class="text-5xl font-bold ">Товары {{selectedBakery?.name}}</p>
+        <div class="flex justify-between p-2 items-center">
+            <div >
+                <p class="text-5xl font-bold ">Товары {{selectedBakery?.name}}</p>
+                <p class="text-3xl font-bold text-gray-400">{{selectedBakery?.address}}</p>
+            </div>
+            
             <div *ngIf="selectedBakery" class="w-10 cursor-pointer select-none">
                 <span *ngIf="isShow" class="material-symbols-outlined text-5xl" (click)="change(!isShow)">
                     visibility_off
@@ -32,7 +36,7 @@
 
 
 
-        <div *ngIf="allProducts" class="w-full flex flex-col gap-10">
+        <div *ngIf="allProducts" class="w-full flex flex-col gap-10 mt-4">
 
 
 
@@ -44,8 +48,8 @@
                         <app-product *ngFor="let productPrice of category.value " [productPrice]="productPrice" (eventDelete)="del($event)" (eventEdit)="edit($event)"/>
                     </div>
                 </div>
-                <div *ngIf="!filterProducts.size">
-                    Таких булочек пока нет
+                <div *ngIf="!filterProducts.size" class="text-2xl text-center">
+                    Булочки не завезли
                 </div>
             </div>
         </div>

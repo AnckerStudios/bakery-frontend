@@ -9,9 +9,8 @@
 
                 <div
                         class="flex items-center flex-col w-full h-2/3 rounded-2xl shadow-xl justify-center bottom-0 group-hover:border-red-800 group-hover:border-2 border pt-[33%]">
-                        <h2 *ngIf="!productPrice.price && !productPrice.inBakery" class="text-red-800"><strong>Еще не
-                                        добавленно</strong></h2>
-                        <h2 class="z-10 text-2xl pb-1"><strong>{{productPrice.product.name}}</strong></h2>
+                        <h2 *ngIf="!productPrice.price && !productPrice.inBakery" class="text-red-800"><strong>Еще не добавленно</strong></h2>
+                        <h2 class="z-10 text-2xl pb-1 whitespace-nowrap overflow-hidden overflow-ellipsis"><strong>{{productPrice.product.name}}</strong></h2>
                         <p class="z-10 text-xs">{{productPrice.product.volume}} {{productPrice.product.category?.isDrink
                                 ? 'мл' : 'г'}}</p>
                         <h2 *ngIf="productPrice.price || productPrice.price===0" class="text-xl z-10 mb-4"><strong>{{productPrice.price}}
@@ -25,11 +24,7 @@
                 (click)="onDelete()">
                 ✕
         </div>
-        <span *ngIf="productPrice.inBakery"
-                class="material-symbols-outlined text-base absolute invisible bottom-2/3 left-2 text-gray-400 font-semibold group-hover:visible hover:scale-110 cursor-pointer hover:text-orange-400"
-                (click)="onEdit()">
-                border_color
-        </span>
+
 
 
 </div>

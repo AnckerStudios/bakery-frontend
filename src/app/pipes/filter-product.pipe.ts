@@ -14,14 +14,6 @@ export class FilterProductPipe implements PipeTransform {
       k.length && map.set( t[0],k)
     }
     return map;
-    // return products.reduce<KeyValue<string, IProductPrice[]>[]>((r,e) => {
-    //   let value = e.value.filter(p => p.product.name.toLowerCase().includes(search.toLowerCase())).sort((x, y) => x.product.name.toLowerCase().trim().localeCompare(y.product.name.toLowerCase().trim()));
-    //   value.length && r.push({
-    //     key: e.key,
-    //     value: value
-    //   });
-    //   return r;
-    // },[]);
   }
 
 }

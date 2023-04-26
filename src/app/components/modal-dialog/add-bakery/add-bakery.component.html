@@ -1,10 +1,10 @@
 <div class="relative">
     <form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col items-center {{status && 'invisible'}}">
-        <div class="text-3xl mt-2 mb-8 font-bold">{{form.value.id ? 'Редактирование':'Добавление'}}</div>
+        <div class="text-3xl mt-2 mb-8 font-bold">{{form.value.id ? 'Редактирование пекарни':'Добавление новой пекарни'}}</div>
         <div class="flex flex-col gap-4">
-            <input type="text" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Название"
+            <input type="text" maxlength="100" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Название"
             formControlName="name">
-            <input type="text" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Адрес"
+            <input type="text" maxlength="100" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Адрес"
             formControlName="address">
         </div>
         

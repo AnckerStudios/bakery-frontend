@@ -1,7 +1,7 @@
 <div class="relative">
     <form [formGroup]="form" (ngSubmit)="submit()" class=" flex flex-col gap-4 items-center {{status && 'invisible'}}">
         <div class="text-3xl font-bold">Введите цену для товара</div>
-        <input type="text" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Название"
+        <input type="number" class="rounded-2xl border h-full w-full px-4 py-2 bg-gray-200" placeholder="Название"
             formControlName="price">
         <div class="text-red-700 w-full">{{mes}}</div>
         <button type="submit" class="rounded-2xl border h-full px-4 py-2 bg-orange-300"><strong>Добавить</strong></button>
