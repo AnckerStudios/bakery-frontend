@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { AddBakeryComponent } from './components/modal-dialog/add-bakery/add-bakery.component';
 import { AddProductComponent } from './components/modal-dialog/add-product/add-product.component';
@@ -27,12 +27,16 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { FilterIngredientPipe } from './pipes/filter-ingredient.pipe';
 import { FilterProductPipe } from './pipes/filter-product.pipe';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     MenuPageComponent,
+    AuthPageComponent,
     NavBarComponent,
     ModalDialogComponent,
     AddBakeryComponent,
@@ -60,7 +64,11 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
