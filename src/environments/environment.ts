@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:8080',
+    apiUrl: '/api/v1/bakery-backend',
     authUrl: '/api/v1/auth',
   };
