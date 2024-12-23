@@ -2,7 +2,7 @@
         (click)="!productPrice.price && !productPrice.inBakery && add(productPrice)">
         <div class="flex items-center flex-col w-full h-full p-1 justify-end relative" (click)="onEdit()">
                 <div class=" absolute top-0 w-40 h-40 object-cover rounded-full  ">
-                        <img [src]="'http://localhost:8080/api/product/image/'+productPrice.product.id" alt="картинка"
+                        <img [src]="'http://localhost/api/v1/bakery/api/product/image/'+productPrice.product.id" alt="картинка"
                                 class="z-10 object-cover w-full h-full rounded-full text-center {{!productPrice.price && !productPrice.inBakery ? 'grayscale' : 'grayscale-0'}}">
                 </div>
 
