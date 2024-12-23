@@ -1,1 +1,23 @@
-<p>person-item works!</p>
+<div *ngIf="person" class="rounded-xl shadow-lg  flex bg relative border" >
+    <div class="p-4 px-6 flex flex-col w-full h-full gap-2">
+        <strong  class="py-2 whitespace-nowrap overflow-hidden overflow-ellipsis">{{person.name}}</strong>
+        <div  class="py-2 whitespace-nowrap overflow-hidden overflow-ellipsis">{{person.description}}</div>
+    </div>
+    <div class=" absolute right-3 top-1/2 -translate-y-1/2 flex gap-4 select-none">
+        <span *ngIf="!status" class="material-symbols-outlined text-gray-400 text-base font-semibold hover:text-orange-500 cursor-pointer" (click)="edit()">
+            border_color
+        </span>
+        <div *ngIf="!status" class=" text-gray-400 font-semibold hover:text-red-500 cursor-pointer" (click)="del()">
+            ✕
+        </div>
+        <app-loading *ngIf="status == 'loading'" />
+        <div *ngIf="status == 'error'" class="flex gap-4 items-center"> 
+            <div class=" font-bold font-sans flex justify-center text-red-600 p-4">
+                Ошибка!
+            </div>
+            <div class=" text-gray-400 font-semibold hover:text-red-500 cursor-pointer" (click)="status = undefined">
+                ✕
+            </div>
+        </div>
+    </div>
+</div>
