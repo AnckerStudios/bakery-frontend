@@ -30,6 +30,11 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { PersonComponent } from './components/person/person.component';
+import { PersonPageComponent } from './pages/person-page/person-page.component';
+import { PersonItemComponent } from './pages/person-page/person-item/person-item.component';
+import { AddPersonComponent } from './components/modal-dialog/add-person/add-person.component';
+import { FilterPersonPipe } from './pipes/filter-person.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,12 @@ import { AuthInterceptor } from './services/auth.interceptor';
     LoadingComponent,
     FilterIngredientPipe,
     FilterProductPipe,
-    NotFoundPageComponent
+    FilterPersonPipe,
+    NotFoundPageComponent,
+    PersonComponent,
+    PersonPageComponent,
+    PersonItemComponent,
+    AddPersonComponent
   ],
   imports: [
     BrowserModule,
