@@ -18,7 +18,11 @@ private url =  `${environment.apiUrl}/api/person`;
     return this.http.get<PersonI[]>(this.url);
   }
   save(body: PersonI): Observable<PersonI> {
-    return this.http.post<PersonI>(this.url, body);
+    if (body.id) {
+      return this.http.put<PersonI>(this.url, body);
+    } else {
+      return this.http.post<PersonI>(this.url, body);
+    }
   }
   update(body: PersonI): Observable<PersonI> {
     return this.http.put<PersonI>(this.url, body);
